@@ -1312,7 +1312,7 @@ $districts_json = json_encode($states_districts);
                                                 </label>
                                             </div>
 
-                                            <!-- Callback timing (shown only when Yes) -->
+                                            <!-- Callback timing shown only when Yes) -->
                                             <div id="callbackTimingBlock" class="callback-timing"
                                                 style="display:<?php echo (($_POST['callback'] ?? '') === 'Yes') ? 'grid' : 'none'; ?>;">
                                                 <!-- Date -->
