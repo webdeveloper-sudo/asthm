@@ -3,8 +3,43 @@ $page_title = "Courses - ACCHM";
 require_once 'includes/header.php';
 require_once 'includes/db.php';
 
-$stmt = $pdo->query("SELECT * FROM courses");
-$courses = $stmt->fetchAll();
+$courses = [
+    [
+        'title' => 'MBA Hospitality Management',
+        'description' => 'MBA Hospitality Management. Duration: 2 Years. Eligibility: Any UG Program. Offers in-depth knowledge and specialisation. Curated to enhance students’ career prospects and open doors for higher-level-positions.',
+        'image_url' => 'assets/images/downloads/0I5A4345-2048x1365.jpg'
+    ],
+    [
+        'title' => 'B.Sc Hotel & Catering Administration',
+        'description' => 'B.Sc Hotel & Catering Administration. Duration: 3 Years. Eligibility: 12th or equivalent. Hotel Management Degree courses are of high demand because of the numerous benefits which a student gets by pursuing them.',
+        'image_url' => 'assets/images/downloads/0W7A6120-scaled.jpg'
+    ],
+    [
+        'title' => 'Diploma in Hotel & Catering Administration',
+        'description' => 'Diploma in Hotel & Catering Administration. Duration: 3 Years. Eligibility: 10th or equivalent. In today’s competitive world, secure a rewarding job after your higher education.',
+        'image_url' => 'assets/images/downloads/0I5A4162-2048x1365.jpg'
+    ],
+    [
+        'title' => 'Craft Certificate Course in Food Production',
+        'description' => 'Craft Certificate Course in Food Production. Duration: 1 Year. Eligibility: 10th or equivalent. Specialized culinary course focusing on commercial food preparation, bakery, and kitchen operations.',
+        'image_url' => 'assets/images/downloads/unsplash_photo-1551504734-5ee1c4a1479b.jpg'
+    ],
+    [
+        'title' => 'Craft Certificate Course in Food & Beverage Service',
+        'description' => 'Craft Certificate Course in Food & Beverage Service. Duration: 1 Year. Eligibility: 10th or equivalent. Learn professional food service, table etiquette, wine service, and bar operations.',
+        'image_url' => 'assets/images/downloads/unsplash_photo-1528605248644-14dd04022da1.jpg'
+    ],
+    [
+        'title' => 'Craft Certificate Course in Front Office',
+        'description' => 'Craft Certificate Course in Front Office. Duration: 1 Year. Eligibility: 10th or equivalent. Focuses on guest relations, check-in/check-out procedures, billing systems, and communication skills.',
+        'image_url' => 'assets/images/downloads/0W7A6176-2048x1365.jpg'
+    ],
+    [
+        'title' => 'Craft Certificate Course in Housekeeping',
+        'description' => 'Craft Certificate Course in Housekeeping. Duration: 1 Year. Eligibility: 10th or equivalent. Training in hotel hygiene standards, accommodation management, and hospitality maintenance operations.',
+        'image_url' => 'assets/images/downloads/0W7A5988-2048x1365 - Copy.jpg'
+    ]
+];
 
 // Group courses for visual alternating layout
 $pg_courses = [];
