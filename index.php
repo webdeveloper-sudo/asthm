@@ -876,10 +876,9 @@ require_once 'includes/header.php';
                                         <div class="form-field field-third">
                                             <label class="field-label" for="index_total_mark">Total Mark <span
                                                     class="req">*</span></label>
-                                            <input type="number" id="index_total_mark" name="total_mark"
-                                                class="field-input" placeholder="Enter Your Total score or percentage" min="0" max="9999"
+                                            <input type="text" id="index_total_mark" name="total_mark"
+                                                class="field-input" placeholder="Enter score (max 3 digits)" maxlength="3" inputmode="numeric" pattern="[0-9]{1,3}"
                                                 required>
-                                            
                                         </div>
 
                                         <!-- Course Interest -->
@@ -1044,14 +1043,42 @@ require_once 'includes/header.php';
         // Client-side validation
         const indexForm = document.getElementById('indexAdmissionForm');
         if (indexForm) {
+            const indexNameInput = document.getElementById('index_student_name');
+            const indexParentInput = document.getElementById('index_parent_name');
+            const indexMobileInput = document.getElementById('index_mobile');
+            const indexMarkInput = document.getElementById('index_total_mark');
+
+            if (indexNameInput) {
+                indexNameInput.addEventListener('input', function() {
+                    this.value = this.value.replace(/[0-9]/g, '');
+                });
+            }
+            if (indexParentInput) {
+                indexParentInput.addEventListener('input', function() {
+                    this.value = this.value.replace(/[0-9]/g, '');
+                });
+            }
+            if (indexMobileInput) {
+                indexMobileInput.setAttribute('maxlength', '10');
+                indexMobileInput.addEventListener('input', function() {
+                    this.value = this.value.replace(/[^0-9]/g, '');
+                });
+            }
+            if (indexMarkInput) {
+                indexMarkInput.setAttribute('maxlength', '3');
+                indexMarkInput.addEventListener('input', function() {
+                    this.value = this.value.replace(/[^0-9]/g, '');
+                });
+            }
+
             indexForm.addEventListener('submit', function (e) {
-                const name = document.getElementById('index_student_name').value.trim();
-                const parent = document.getElementById('index_parent_name').value.trim();
-                const mobile = document.getElementById('index_mobile').value.trim();
+                const name = indexNameInput.value.trim();
+                const parent = indexParentInput.value.trim();
+                const mobile = indexMobileInput.value.trim();
                 const state = document.getElementById('index_state').value;
                 const district = document.getElementById('index_district').value;
                 const board = document.getElementById('index_board').value;
-                const totalMark = document.getElementById('index_total_mark').value.trim();
+                const totalMark = indexMarkInput.value.trim();
                 const course = document.getElementById('index_course_interest').value;
 
                 if (!name || !parent || !mobile || !state || !district || !board || !totalMark || !course) {
@@ -1060,11 +1087,33 @@ require_once 'includes/header.php';
                     return;
                 }
 
+                if (/[0-9]/.test(name)) {
+                    e.preventDefault();
+                    indexNameInput.focus();
+                    alert('Student Name cannot contain numbers.');
+                    return;
+                }
+
+                if (/[0-9]/.test(parent)) {
+                    e.preventDefault();
+                    indexParentInput.focus();
+                    alert('Parent Name cannot contain numbers.');
+                    return;
+                }
+
                 if (!/^[0-9]{10}$/.test(mobile)) {
                     e.preventDefault();
-                    document.getElementById('index_mobile').focus();
-                    document.getElementById('index_mobile').style.borderColor = '#ff416c';
+                    indexMobileInput.focus();
+                    indexMobileInput.style.borderColor = '#ff416c';
                     alert('Please enter a valid 10-digit mobile number.');
+                    return;
+                }
+
+                if (!/^[0-9]{1,3}$/.test(totalMark)) {
+                    e.preventDefault();
+                    indexMarkInput.focus();
+                    indexMarkInput.style.borderColor = '#ff416c';
+                    alert('Total Mark must be a number with up to 3 digits.');
                     return;
                 }
 
@@ -1074,9 +1123,14 @@ require_once 'includes/header.php';
                 btn.style.opacity = '0.85';
             });
 
-            document.getElementById('index_mobile').addEventListener('input', function () {
+            indexMobileInput.addEventListener('input', function () {
                 this.style.borderColor = '';
             });
+            if (indexMarkInput) {
+                indexMarkInput.addEventListener('input', function () {
+                    this.style.borderColor = '';
+                });
+            }
 
             const todayStr = new Date().toISOString().split('T')[0];
             document.getElementById('index_cb_date') && (document.getElementById('index_cb_date').min = todayStr);

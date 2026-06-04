@@ -12,12 +12,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_contact'])) {
     $message = trim($_POST['message'] ?? '');
     
     if ($name && $phone && $email) {
-        try {
-            $stmt = $pdo->prepare("INSERT INTO contact_inquiries (name, phone, email, message) VALUES (?, ?, ?, ?)");
-            $stmt->execute([$name, $phone, $email, $message]);
-            $success_msg = "Thank you! Your inquiry has been successfully submitted and recorded.";
-        } catch (Exception $e) {
-            $error_msg = "Sorry, there was an error processing your request. Please try again.";
+        if (preg_match('/[0-9]/', $name)) {
+            $error_msg = "Name cannot contain numbers.";
+        } elseif (!preg_match('/^[0-9]{10}$/', $phone)) {
+            $error_msg = "Phone number must be exactly 10 digits.";
+        } else {
+            try {
+                $stmt = $pdo->prepare("INSERT INTO contact_inquiries (name, phone, email, message) VALUES (?, ?, ?, ?)");
+                $stmt->execute([$name, $phone, $email, $message]);
+                
+                // Redirect to thank you page
+                header("Location: thank_you.php");
+                exit;
+            } catch (Exception $e) {
+                $error_msg = "Sorry, there was an error processing your request. Please try again.";
+            }
         }
     } else {
         $error_msg = "Please fill in all required fields.";
@@ -616,5 +625,49 @@ require_once 'includes/header.php';
         </div>
     </section>
 </main>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const nameInput = document.getElementById('name');
+        const phoneInput = document.getElementById('phone');
+        const form = nameInput ? nameInput.closest('form') : null;
+
+        if (nameInput) {
+            nameInput.addEventListener('input', function() {
+                // Remove all numbers
+                this.value = this.value.replace(/[0-9]/g, '');
+            });
+        }
+
+        if (phoneInput) {
+            phoneInput.setAttribute('maxlength', '10');
+            phoneInput.addEventListener('input', function() {
+                // Remove all non-digits
+                this.value = this.value.replace(/[^0-9]/g, '');
+            });
+        }
+
+        if (form) {
+            form.addEventListener('submit', function (e) {
+                const name = nameInput.value.trim();
+                const phone = phoneInput.value.trim();
+
+                if (/[0-9]/.test(name)) {
+                    e.preventDefault();
+                    alert('Full Name cannot contain numbers.');
+                    nameInput.focus();
+                    return;
+                }
+
+                if (!/^[0-9]{10}$/.test(phone)) {
+                    e.preventDefault();
+                    alert('Phone number must be exactly 10 digits.');
+                    phoneInput.focus();
+                    return;
+                }
+            });
+        }
+    });
+</script>
 
 <?php require_once 'includes/footer.php'; ?>

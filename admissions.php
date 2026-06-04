@@ -174,6 +174,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $context = stream_context_create($opts);
                 @file_get_contents(GOOGLE_SCRIPT_URL, false, $context);
             }
+            header("Location: thank_you.php");
+            exit;
         } catch (Exception $e) {
             $error_message = "Error submitting application. Please try again.";
         }
@@ -1268,10 +1270,9 @@ $districts_json = json_encode($states_districts);
                                     <div class="field">
                                         <label class="field-label" for="total_mark">Total Mark <span
                                                 class="req">*</span></label>
-                                        <input type="number" id="total_mark" name="total_mark" class="field-input"
-                                            placeholder="Enter your total or percentage score" min="0" max="9999"
+                                        <input type="text" id="total_mark" name="total_mark" class="field-input"
+                                            placeholder="Enter score (max 3 digits)" maxlength="3" inputmode="numeric" pattern="[0-9]{1,3}" required
                                             value="<?php echo htmlspecialchars($_POST['total_mark'] ?? ''); ?>">
-                                        <!-- <span class="field-hint"></span> -->
                                     </div>
 
                                     <!-- Course Interest -->
@@ -1525,14 +1526,69 @@ $districts_json = json_encode($states_districts);
             block.style.display = show ? 'grid' : 'none';
         }
 
+        // ── Live input sanitization and length limits ─────────────────────────
+        const studentNameInput = document.getElementById('student_name');
+        const parentNameInput = document.getElementById('parent_name');
+        const mobileInput = document.getElementById('mobile');
+        const totalMarkInput = document.getElementById('total_mark');
+
+        if (studentNameInput) {
+            studentNameInput.addEventListener('input', function() {
+                this.value = this.value.replace(/[0-9]/g, '');
+            });
+        }
+        if (parentNameInput) {
+            parentNameInput.addEventListener('input', function() {
+                this.value = this.value.replace(/[0-9]/g, '');
+            });
+        }
+        if (mobileInput) {
+            mobileInput.setAttribute('maxlength', '10');
+            mobileInput.addEventListener('input', function() {
+                this.value = this.value.replace(/[^0-9]/g, '');
+            });
+        }
+        if (totalMarkInput) {
+            totalMarkInput.setAttribute('maxlength', '3');
+            totalMarkInput.addEventListener('input', function() {
+                this.value = this.value.replace(/[^0-9]/g, '');
+            });
+        }
+
         // ── Client-side validation ────────────────────────────────────────
         document.getElementById('admissionForm').addEventListener('submit', function (e) {
+            const studentName = document.getElementById('student_name').value.trim();
+            const parentName = document.getElementById('parent_name').value.trim();
             const mobile = document.getElementById('mobile').value.trim();
+            const totalMark = document.getElementById('total_mark').value.trim();
+
+            if (/[0-9]/.test(studentName)) {
+                e.preventDefault();
+                document.getElementById('student_name').focus();
+                alert('Student Name cannot contain numbers.');
+                return;
+            }
+
+            if (/[0-9]/.test(parentName)) {
+                e.preventDefault();
+                document.getElementById('parent_name').focus();
+                alert('Parent Name cannot contain numbers.');
+                return;
+            }
+
             if (!/^[0-9]{10}$/.test(mobile)) {
                 e.preventDefault();
                 document.getElementById('mobile').focus();
                 document.getElementById('mobile').style.borderColor = '#cd3539';
                 alert('Please enter a valid 10-digit mobile number.');
+                return;
+            }
+
+            if (!/^[0-9]{1,3}$/.test(totalMark)) {
+                e.preventDefault();
+                document.getElementById('total_mark').focus();
+                document.getElementById('total_mark').style.borderColor = '#cd3539';
+                alert('Total Mark must be a number with up to 3 digits.');
                 return;
             }
 
@@ -1553,6 +1609,11 @@ $districts_json = json_encode($states_districts);
         document.getElementById('mobile').addEventListener('input', function () {
             this.style.borderColor = '';
         });
+        if (totalMarkInput) {
+            totalMarkInput.addEventListener('input', function () {
+                this.style.borderColor = '';
+            });
+        }
 
         // ── Smooth date min (today) ───────────────────────────────────────
         const today = new Date().toISOString().split('T')[0];

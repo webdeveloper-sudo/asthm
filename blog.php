@@ -23,7 +23,7 @@ $posts = $stmt->fetchAll();
         text-align: center;
         overflow: hidden;
         background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.85)),
-                    url('assets/images/downloads/0W7A5988-2048x1365 - Copy.jpg') center/cover no-repeat;
+                    url('assets/images/downloads/0W7A5988-2048x1365 - Copy.jpg') top/cover no-repeat;
     ">
         <div style="
             position: relative;

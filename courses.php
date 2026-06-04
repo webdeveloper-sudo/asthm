@@ -63,7 +63,7 @@ function extractMeta($desc) {
         text-align: center;
         overflow: hidden;
         background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.85)),
-                    url('assets/images/downloads/0I5A4419-2048x1365.jpg') center/cover no-repeat;
+                    url('assets/images/downloads/0I5A4419-2048x1365.jpg') top/cover no-repeat;
     ">
         <div style="
             position: relative;
