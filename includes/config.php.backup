@@ -1,0 +1,6 @@
+<?php
+// Database configuration
+define('DB_HOST', '66.29.132.89'); // Connect to Namecheap remote database from localhost
+define('DB_NAME', 'wowwenqd_aachm_live');
+define('DB_USER', 'wowwenqd_id_rsa');
+define('DB_PASS', 'Achariya@26');

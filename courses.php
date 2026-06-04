@@ -1,7 +1,7 @@
 <?php
 $page_title = "Courses - ACCHM";
-require_once 'includes/header.php';
 require_once 'includes/db.php';
+require_once 'includes/header.php';
 
 $courses = [
     [

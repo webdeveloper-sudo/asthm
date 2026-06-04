@@ -1,5 +1,4 @@
 <?php
-require_once 'includes/header.php';
 require_once 'includes/db.php';
 
 // Google Apps Script Web App URL for Google Sheets integration
@@ -184,43 +183,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 $states_json = json_encode(array_keys($states_districts));
 $districts_json = json_encode($states_districts);
+
+$page_title = "Online Admission – ACCHM | Achariya College of Catering & Hotel Management";
+$meta_description = "Apply for admission to ACCHM. Fill out our online admission form for Diploma, B.Sc and MBA programmes in Hotel Management and Catering.";
+require_once 'includes/header.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Admission – ACCHM | Achariya College of Catering &amp; Hotel Management</title>
-    <meta name="description"
-        content="Apply for admission to ACCHM. Fill out our online admission form for Diploma, B.Sc and MBA programmes in Hotel Management and Catering.">
-
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="assets/images/acchm-logo/ACCHM_LOGO-02.png" type="image/x-icon">
-    <link rel="icon" href="assets/images/acchm-logo/ACCHM_LOGO-02.png" type="image/png">
-
-    <!-- Open Graph / Facebook Meta Tags for Link Preview Sharing -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Online Admission – ACCHM | Achariya College of Catering &amp; Hotel Management">
-    <meta property="og:description"
-        content="Achariya College of Catering and Hotel Management (ACCHM) is a premier hospitality institute offering world-class training in culinary arts, catering, and hotel administration. We prepare students for international careers with hands-on practice, expert guidance, and a 100% placement guarantee. Start your journey with us and transform your passion into a premium profession. Connect with our admissions desk today! Email: admissions@asthm.edu.in | Mobile: +91 94422 77028">
-    <meta property="og:image"
-        content="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST']; ?>/assets/images/acchm-logo/ACCHM_LOGO-01.png">
-    <meta property="og:url"
-        content="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>">
-
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Online Admission – ACCHM | Achariya College of Catering &amp; Hotel Management">
-    <meta name="twitter:description"
-        content="Achariya College of Catering and Hotel Management (ACCHM) is a premier hospitality institute offering world-class training in culinary arts, catering, and hotel administration. We prepare students for international careers with hands-on practice, expert guidance, and a 100% placement guarantee. Start your journey with us and transform your passion into a premium profession. Connect with our admissions desk today! Email: admissions@asthm.edu.in | Mobile: +91 94422 77028">
-    <meta name="twitter:image"
-        content="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST']; ?>/assets/images/acchm-logo/ACCHM_LOGO-01.png">
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
         /* ═══════════════════════════════════════════════
        RESET & BASE
@@ -1104,9 +1071,6 @@ $districts_json = json_encode($states_districts);
             }
         }
     </style>
-</head>
-
-<body>
 
     <!-- ══════════════════════════════════════════
      HEADER — Glassmorphic (matching site)

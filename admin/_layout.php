@@ -563,10 +563,10 @@ $count_blogs    = $pdo->query("SELECT COUNT(*) FROM blog_posts")->fetchColumn();
             Blog Manager
             <span class="nav-badge muted"><?php echo $count_blogs; ?></span>
         </a>
-        <a href="manage_courses.php" class="nav-item <?php echo ($active_page ?? '') === 'courses' ? 'active' : ''; ?>">
+        <!-- <a href="manage_courses.php" class="nav-item <?php echo ($active_page ?? '') === 'courses' ? 'active' : ''; ?>">
             <span class="nav-icon"><i class="fas fa-graduation-cap"></i></span>
             Courses
-        </a>
+        </a> -->
     </nav>
 
     <div class="sidebar-footer">

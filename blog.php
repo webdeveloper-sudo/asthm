@@ -86,7 +86,7 @@ $posts = $stmt->fetchAll();
                     <h3 style="color: var(--color-text-light);">No posts available at the moment. Check back soon!</h3>
                 </div>
             <?php else: ?>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem;">
                     <?php foreach ($posts as $post): ?>
                         <div class="glass-card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
                             <div style="height: 200px; overflow: hidden;">

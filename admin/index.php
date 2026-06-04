@@ -110,14 +110,14 @@ $default_tab = $_GET['tab'] ?? 'general';
                 <div class="stat-sub ok"><a href="manage_blogs.php" style="color:inherit;text-decoration:none;"><i class="fas fa-arrow-right" style="font-size:0.65rem;"></i> Manage</a></div>
             </div>
         </div>
-        <div class="stat-card">
+        <!-- <div class="stat-card">
             <div class="stat-icon purple"><i class="fas fa-graduation-cap"></i></div>
             <div>
                 <div class="stat-value"><?php echo $total_courses; ?></div>
                 <div class="stat-label">Courses Listed</div>
                 <div class="stat-sub ok"><a href="manage_courses.php" style="color:inherit;text-decoration:none;"><i class="fas fa-arrow-right" style="font-size:0.65rem;"></i> Manage</a></div>
             </div>
-        </div>
+        </div> -->
     </div>
 
     <!-- Enquiries Card -->

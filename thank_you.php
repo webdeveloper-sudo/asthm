@@ -9,7 +9,7 @@ require_once 'includes/header.php';
     ══════════════════════════════════════════ -->
     <div style="
         position: relative;
-        height: 600px;
+        height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -24,9 +24,10 @@ require_once 'includes/header.php';
             color: #ffffff;
             padding: 0 2rem;
             margin-top: 72px;
+            border: 1px solid white;
+            padding: 80px 50px;
         ">
-            <div
-                style="
+            <div style="
                     display: inline-flex;
                     align-items: center;
                     gap: 0.5rem;
@@ -42,8 +43,7 @@ require_once 'includes/header.php';
                     border-radius: 8px;
                     margin-bottom: 1.5rem;
                     backdrop-filter: blur(8px);
-                "
-            >
+                ">
                 <i class="fas fa-check-circle"></i>
                 Submission Successful
             </div>
@@ -67,11 +67,15 @@ require_once 'includes/header.php';
             ">
                 Your submission has been received. Our team will get back to you shortly.
             </p>
+            <a href="index.php" class="btn btn-primary"
+                style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2.5rem; font-weight: 700; text-transform: uppercase; margin-top: 2rem;">
+                Done <i class="fas fa-home"></i>
+            </a>
         </div>
     </div>
 
     <!-- Done Button Container -->
-    <section class="section" style="padding: 6rem 0; background: var(--color-white); text-align: center;">
+    <!-- <section class="section" style="padding: 6rem 0; background: var(--color-white); text-align: center;">
         <div class="container" style="max-width: 600px;">
             <div class="glass-card" style="padding: 3rem; box-shadow: 0 15px 35px rgba(0,0,0,0.05); border-radius: var(--radius-xl); border: 1px solid rgba(0,0,0,0.06);">
                 <div style="background: rgba(46, 204, 113, 0.1); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; color: #2ecc71; font-size: 2.2rem;">
@@ -79,12 +83,10 @@ require_once 'includes/header.php';
                 </div>
                 <h2 style="font-size: 2rem; color: var(--color-primary-dark); margin-bottom: 1rem;">Submission Completed</h2>
                 <p style="color: var(--color-text-light); line-height: 1.7; margin-bottom: 2rem;">We have successfully saved your details. A representative from ACHARIYA College of Catering and Hotel Management will contact you via phone or email shortly.</p>
-                <a href="index.php" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2.5rem; font-weight: 700; text-transform: uppercase;">
-                    Done <i class="fas fa-home"></i>
-                </a>
+                
             </div>
         </div>
-    </section>
+    </section> -->
 </main>
 
 <?php require_once 'includes/footer.php'; ?>
